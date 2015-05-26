@@ -139,8 +139,8 @@ XeviNumberLayer *xevi_number_layer_create(GRect frame) {
         // set member
         xevi_layer = (XeviNumberLayer*)layer_get_data(layer);
         xevi_layer->layer = layer;
-        xevi_layer->number[GEN_NEW] = 0;
-        xevi_layer->number[GEN_OLD] = 0;
+        xevi_layer->number[GEN_NEW] = XEVI_NUMBER_INVALID;
+        xevi_layer->number[GEN_OLD] = XEVI_NUMBER_INVALID;
         xevi_layer->color = DEFAULT_COLOR;
         xevi_number_layer_set_number(xevi_layer, 0);
     }
@@ -161,9 +161,22 @@ uint8_t xevi_number_layer_get_number(XeviNumberLayer *xevi_layer, uint8_t number
 
 void xevi_number_layer_set_number(XeviNumberLayer *xevi_layer, uint8_t number) {
     if (number <= XEVI_NUMBER_MAX) {
-        xevi_layer->number[GEN_OLD] = xevi_layer->number[GEN_NEW];
-        xevi_layer->number[GEN_NEW] = number;
-        s_number_to_line(xevi_layer);
-        anime_line(xevi_layer->anime_from, xevi_layer->anime_to, xevi_layer->line_num, s_anime_line_callback, (void*)xevi_layer);
+        if (xevi_layer->number[GEN_NEW] != number) {
+            xevi_layer->number[GEN_OLD] = xevi_layer->number[GEN_NEW];
+            xevi_layer->number[GEN_NEW] = number;
+            
+            // create points
+            s_number_to_line(xevi_layer);
+            
+            // create animation
+            PointAnimation *point_anime = point_animation_create(xevi_layer->anime_from, xevi_layer->anime_to, xevi_layer->line_num);
+            point_animation_set_callback(point_anime, s_anime_line_callback, (void*)xevi_layer);
+            Animation *anime = point_animation_get_animation(point_anime);
+            animation_set_duration(anime, 100);
+            animation_set_curve(anime, AnimationCurveEaseIn);
+
+            // run animation
+            animation_schedule(anime);
+        }
     }
 }
