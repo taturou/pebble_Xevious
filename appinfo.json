@@ -1,0 +1,23 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "taturou@gmail.com",
+    "longName": "XEVIOUS",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "XEVIOUS",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "270d4ed6-2875-4455-9295-dc57024ce070",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
