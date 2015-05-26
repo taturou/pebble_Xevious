@@ -2,7 +2,7 @@
 #include "xevi_number_layer.h"
 #include "animation.h"
     
-#define STROKE_WIDTH (5)
+#define STROKE_WIDTH (4)
 
 #define MAX_LINE     (5)
 #define MAX_POINT    (MAX_LINE * 2)    // MAX_LINE * 2points (from, to)
@@ -172,7 +172,7 @@ void xevi_number_layer_set_number(XeviNumberLayer *xevi_layer, uint8_t number) {
             PointAnimation *point_anime = point_animation_create(xevi_layer->anime_from, xevi_layer->anime_to, xevi_layer->line_num);
             point_animation_set_callback(point_anime, s_anime_line_callback, (void*)xevi_layer);
             Animation *anime = point_animation_get_animation(point_anime);
-            animation_set_duration(anime, 100);
+            animation_set_duration(anime, 1000);
             animation_set_curve(anime, AnimationCurveEaseIn);
 
             // run animation

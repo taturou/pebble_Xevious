@@ -58,12 +58,12 @@ static void s_window_load(Window *window) {
 
     // xevious-number-layer
     GRect frames[NUM_XEVI_LAYER] = {
-        GRect(22,      7,           47, 47),
-        GRect(22+47+6, 7,           47, 47),
-        GRect(22,      7+47+6,      47, 47),
-        GRect(22+47+6, 7+47+6,      47, 47),
-        GRect(22,      7+47+6+47+6, 47, 47),
-        GRect(22+47+6, 7+47+6+47+6, 47, 47),
+        GRect(20,      7,           47, 47),
+        GRect(20+47+6, 7,           47, 47),
+        GRect(20,      7+47+6,      47, 47),
+        GRect(20+47+6, 7+47+6,      47, 47),
+        GRect(20,      7+47+6+47+6, 47, 47),
+        GRect(20+47+6, 7+47+6+47+6, 47, 47),
     };
     for (int i = 0; i < NUM_XEVI_LAYER; i++) {
         s_xevi_layer[i] = xevi_number_layer_create(frames[i]);
@@ -71,13 +71,13 @@ static void s_window_load(Window *window) {
     }
 
     // text-layer
-    s_text_layer = text_layer_create(GRect(0, 0, bounds.size.w, 20));
+    s_text_layer = text_layer_create(GRect(0, 168/2-10, bounds.size.w, 20));
 #if PBL_PLATFORM_BASALT
     text_layer_set_font(s_text_layer, fonts_get_system_font(FONT_KEY_LECO_20_BOLD_NUMBERS));
 #else
     text_layer_set_font(s_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14));
 #endif
-    text_layer_set_text_alignment(s_text_layer, GTextAlignmentLeft);
+    text_layer_set_text_alignment(s_text_layer, GTextAlignmentCenter);
     text_layer_set_background_color(s_text_layer, GColorClear);
     text_layer_set_text_color(s_text_layer, GColorWhite);
     layer_set_hidden(text_layer_get_layer(s_text_layer), true);
