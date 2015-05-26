@@ -1,6 +1,8 @@
 #include <pebble.h>
 #include "xevi_number_layer.h"
 
+#define STROKE_WIDTH (5)
+
 typedef struct XeviNumberLayer {
     Layer *layer;
     uint8_t number;
@@ -10,7 +12,11 @@ typedef struct XeviNumberLayer {
 static void s_layer_update_proc(struct Layer *layer, GContext *ctx) {
     XeviNumberLayer *xevi_layer = (XeviNumberLayer*)layer_get_data(layer);
     GRect bounds = layer_get_bounds(layer);
-    
+
+#if PBL_PLATFORM_BASALT
+    graphics_context_set_antialiased(ctx, true);
+    graphics_context_set_stroke_width(ctx, STROKE_WIDTH);
+#endif
     graphics_context_set_stroke_color(ctx, xevi_layer->color);
 
     // points
@@ -51,18 +57,18 @@ static void s_layer_update_proc(struct Layer *layer, GContext *ctx) {
 
 XeviNumberLayer *xevi_number_layer_create(GRect frame) {
     XeviNumberLayer *xevi_layer = NULL;
-    
+
     Layer *layer = layer_create_with_data(frame, sizeof(XeviNumberLayer));
     if (layer != NULL) {
-        // layer
-        layer_set_update_proc(layer, s_layer_update_proc);
-        
         // set member
         xevi_layer = (XeviNumberLayer*)layer_get_data(layer);
         xevi_layer->layer = layer;
         xevi_layer->number = 0;
         xevi_layer->color = GColorBlack;
-    }    
+
+        // layer
+        layer_set_update_proc(layer, s_layer_update_proc);
+    }
     return xevi_layer;
 }
 
