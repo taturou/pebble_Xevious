@@ -175,6 +175,7 @@ void xevi_number_layer_set_number(XeviNumberLayer *xevi_layer, uint8_t number) {
             animation_set_duration(anime, 1000);
             animation_set_curve(anime, AnimationCurveEaseIn);
 
+            
             // run animation
             animation_schedule(anime);
         }

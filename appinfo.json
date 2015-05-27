@@ -4,13 +4,20 @@
         ""
     ],
     "companyName": "taturou@gmail.com",
-    "longName": "XEVIOUS",
+    "longName": "XEVI NUMBER",
     "projectType": "native",
     "resources": {
-        "media": []
+        "media": [
+            {
+                "file": "images/menu_image.png",
+                "menuIcon": true,
+                "name": "MENU_ICON",
+                "type": "png"
+            }
+        ]
     },
     "sdkVersion": "3",
-    "shortName": "XEVIOUS",
+    "shortName": "XEVI NUMBER",
     "targetPlatforms": [
         "aplite",
         "basalt"
@@ -18,6 +25,6 @@
     "uuid": "270d4ed6-2875-4455-9295-dc57024ce070",
     "versionLabel": "1.0",
     "watchapp": {
-        "watchface": false
+        "watchface": true
     }
 }
